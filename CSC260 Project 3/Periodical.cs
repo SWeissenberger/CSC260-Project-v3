@@ -36,19 +36,20 @@ namespace CSC260_Project_3
 
 		public int Volume { get { return _volume; } set { _volume = value; } }
 		//public override string Title { get; set; }
+		public override string Type { get { return _type; } set {/*throw an exception saying it's read only?*/ } }
 
-		public Periodical(string title, int volume, int issue, int pages, string publisher, List<string> editors)
+		public Periodical(string title, int volume, int issue, int pages, string publisher, List<string> editors, string genre, string datepublished) // add genre and datepublished para. to NClass
 		{
 			_id = _generatedID;
-			_title = title;
-			foreach (string auth in editors)
+			_title = title + "Vol" + volume + "Issue" + issue;
+			_volume = volume; 
+			_issue = issue;
+			foreach (string ed in editors)
 			{
-				_creators.Add(auth);
+				_creators.Add(ed);
 			}
-			// _creators = authors;
 			_publisher = publisher;
 			_pages = pages;
-			_format = format;
 			_datePublished = datepublished;
 			_genre = genre;
 			_instances++;
@@ -56,7 +57,21 @@ namespace CSC260_Project_3
 
 		public override void ShowFound(bool showAll)
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("ID: " + ID);
+			Console.WriteLine("-Title: " + Title);
+			if (showAll == true)
+			{
+				Console.WriteLine("-Medium: " + Type);
+				Console.WriteLine("-Checked out: " + CheckedOut);
+				//show item title
+				foreach (string c in _creators)
+				{
+					Console.WriteLine("-Editor(s): " + c);
+				}
+				Console.WriteLine("-Pages: " + Pages);
+				Console.WriteLine("-Date published: " + DatePublished);
+				Console.WriteLine("-Publisher: " + Publisher);
+			}
 		}
 	}
 }

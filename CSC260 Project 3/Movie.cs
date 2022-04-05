@@ -11,7 +11,7 @@ namespace CSC260_Project_3
 	{
 		private string _company;
 		private int _minutes;
-		private static int _instances;
+		private static int _instances = 0;
 		new private string _type = "Movie";
 
 		public string Company { get { return _company; } set { _company = value; } }
@@ -28,13 +28,13 @@ namespace CSC260_Project_3
 			{
 			}
 		}
-
+		public override string Type { get { return _type; } set { } }
 		//public override string Title { get; set; }
 		public Movie(string title)
 		{
-			//throw new NotImplementedException();
 			_id = _generatedID;
 			_title = title;
+			_instances++;
 		}
 
 		public Movie(string title, List<string> directors, string company, string releaseYear, string genre)
@@ -45,6 +45,7 @@ namespace CSC260_Project_3
 			_company = company;
 			_datePublished = releaseYear;
 			_genre = genre;
+			_instances++;
 		}
 
 		public override void ShowFound(bool showAll)

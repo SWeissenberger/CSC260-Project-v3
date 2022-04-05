@@ -58,6 +58,7 @@ namespace CSC260_Project_3
 		{
 			_id = _generatedID;
 			_title = title;
+			_instances++;
 		}
 
 		public override void ShowFound(bool showAll)
