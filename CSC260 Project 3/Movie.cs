@@ -64,6 +64,7 @@ namespace CSC260_Project_3
 				Console.WriteLine("-Company: " + Company);
 				Console.WriteLine("-Release year: " + DatePublished);
 				Console.WriteLine("-Length in minutes: " + Minutes);
+				Console.WriteLine("-Genre: " + Genre);
 			}
 		}
 	}

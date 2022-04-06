@@ -121,7 +121,7 @@ namespace CSC260_Project_3
             }
 		}
 
-		public static void ShowAllofType(List<Media> list, string type)
+		public static void ShowAllOfType(List<Media> list, string type)
 		{
 			var newlist = list.FindAll(x => x.Type == type);
 			foreach (Media m in newlist)

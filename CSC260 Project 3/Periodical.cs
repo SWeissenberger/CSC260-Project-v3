@@ -71,6 +71,7 @@ namespace CSC260_Project_3
 				Console.WriteLine("-Pages: " + Pages);
 				Console.WriteLine("-Date published: " + DatePublished);
 				Console.WriteLine("-Publisher: " + Publisher);
+				Console.WriteLine("-Genre: " + Genre);
 			}
 		}
 	}
