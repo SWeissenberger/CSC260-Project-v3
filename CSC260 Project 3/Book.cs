@@ -17,7 +17,7 @@ namespace CSC260_Project_3
 		new private string _type = "Book";
 		public string Format { get { return _format;  } set { _format = value; } }
 
-		public override int Instances 
+		public static int Instances 
 		{
 			get
 			{

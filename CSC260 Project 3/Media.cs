@@ -17,7 +17,7 @@ namespace CSC260_Project_3
 		public static int _generatedID = 0;
 		public string _genre;
 		public int _id;
-		public string _log = "";
+		public static string _log = "";
 		public string _title;
 		//private string _type; // just noticed I didn't make a property for this--should prolly reconcile the subclasses' _type first
 		public string _type = "media";
@@ -29,7 +29,7 @@ namespace CSC260_Project_3
 		public virtual string DatePublished { get { return _datePublished; } set { _datePublished = value; } }
 		public virtual string Genre { get { return _genre; } set { _genre = value; } }
 		public virtual int ID { get { return _id; } private set { } }
-		public virtual int Instances
+		/*public virtual int Instances
 		{
 			get
 			{
@@ -39,11 +39,12 @@ namespace CSC260_Project_3
 			{
 				return;
 			}
-		}
+		}*/
 		//type should prolly be private set, but doesn't seem to work
 		public virtual string Type { get { return _type; } set { } } // don't forget to change nclass to model this & subclasses
 
-		public virtual string Log { get { return _log; } set { _log = value; } }
+		//public virtual string Log { get { return _log; } set { _log = value; } }
+		public static string Log { get { return _log; } set { _log = value; } }
 		public virtual string Title { get { return _title; } set { _title = value; } }
 		//public abstract string Title { get; set; }
 
@@ -53,12 +54,12 @@ namespace CSC260_Project_3
 			//throw new NotImplementedException();
 			// the incrementing id process doesn't seem to work
 			_generatedID++;
-
+			_log = _log + "Item added \n";
 		}
 		// think all this parameters are wrong--think I can (should?) just pass the instance itself 
 		// if i change parameters, don't forget to 
 		//public void DeleteItem(List<Media> list, int id)
-		public void DeleteItem(List<Media> list, Media item)
+		public static void DeleteItem(List<Media> list, Media item)
 		{
 			//throw new NotImplementedException();
 			// using id (which should be passed as Media.ID), find the item in the list and delete it
@@ -72,10 +73,10 @@ namespace CSC260_Project_3
 
 		}
 
-		public void DisplayLog()
+		public static void DisplayLog()
 		{
 			//throw new NotImplementedException();
-			Console.WriteLine(Log);
+			Console.WriteLine(Media.Log);
 		}
 
 		//BIG question--will a list of type Media be able to hold instances of subclasses of Media?
@@ -84,7 +85,19 @@ namespace CSC260_Project_3
 		public static void SearchByTitle(List<Media> list, string title)
 		{
 			var found = list.Find(x => x.Title == title);
-			found.ShowFound(true);
+
+			if (list == null)
+            {
+				Console.WriteLine("Inventory empty");
+            }
+			else if (found != null)
+			{
+				found.ShowFound(true);
+			}
+			else 
+			{
+				Console.WriteLine("Title not found");
+			}
 		}
 		public static void SearchByID(List<Media> list, int id)
 		{

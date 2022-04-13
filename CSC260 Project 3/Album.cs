@@ -14,7 +14,8 @@ namespace CSC260_Project_3
 		private List<string> _songs = new List<string> { };
 		private int _totalMinutes;
 
-		public override int Instances
+		//all subclass Instances formerly "override"
+		public static int Instances
 		{
 			get
 			{

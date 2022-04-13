@@ -16,7 +16,7 @@ namespace CSC260_Project_3
 		private string _publisher;
 		private int _volume;
 
-		public override int Instances 
+		public static int Instances 
 		{ 
 			get
 			{
@@ -38,6 +38,22 @@ namespace CSC260_Project_3
 		//public override string Title { get; set; }
 		public override string Type { get { return _type; } set {/*throw an exception saying it's read only?*/ } }
 
+		/*public Periodical(string title, int volume, int issue, int pages, string publisher, List<string> editors, string genre, string datepublished) // add genre and datepublished para. to NClass
+		{
+			_id = _generatedID;
+			_title = title + "Vol" + volume + "Issue" + issue;
+			_volume = volume;
+			_issue = issue;
+			foreach (string ed in editors)
+			{
+				_creators.Add(ed);
+			}
+			_publisher = publisher;
+			_pages = pages;
+			_datePublished = datepublished;
+			_genre = genre;
+			_instances++;
+		}*/
 		public Periodical(string title, int volume, int issue, int pages, string publisher, List<string> editors, string genre, string datepublished) // add genre and datepublished para. to NClass
 		{
 			_id = _generatedID;

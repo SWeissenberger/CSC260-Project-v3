@@ -18,7 +18,7 @@ namespace CSC260_Project_3
 
 		public int Minutes { get { return _minutes; } set { _minutes = value; } }
 
-		public override int Instances 
+		public static int Instances 
 		{ 
 			get
 			{
