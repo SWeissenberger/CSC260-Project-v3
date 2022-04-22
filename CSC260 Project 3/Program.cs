@@ -4,6 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// possible aids 
+/*https://en.pon-navi.net/nazuke/name/reading/a/keisuke
+https://exceptionnotfound.net/const-vs-static-vs-readonly-in-c-sharp-applications/
+https://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/static-and-non-static-fields-in-C-Sharp/
+*/
+//links to related docs:
+/*
+ * notes: https://onedrive.live.com/edit.aspx?resid=A19DB1A21E96D0A1!738&ithint=file%2cdocx&wdOrigin=OFFICECOM-WEB.START.MRU
+ * my rubric: https://docs.google.com/spreadsheets/d/14KyIsj6b_jhIfZX-hO6JyIxZWllbCLtTD7KqeCi3rKI/edit#gid=0
+ */
+/*
+// things I can probably unit test: ShowFound, DeleteItem, the "submethods" of EditItem, possibly adding items to list
+// ShowFound: purpose is to display the aspects of an item--
+things I could test: what if item doesn't exist/is null, what if certain aspects aren't filled out 
+(is that possible),
+DeleteItem: purpose is to remove item from library--
+test: if item doesn't exist/is null/uninitialized, when list doesn't exist/is null/uninitialized,
+EditItem: purpose is to let item be edited--
+test: if item doesn't exist/is null/uninitialized, if user enters wrong type of input 
+(that possible? all input automatically seems to be a string)
+Adding items: what if list is too large
+ */
+
+
+//undone: writing each method so it logs each action
 namespace CSC260_Project_3
 {
     class Program
@@ -90,6 +115,9 @@ namespace CSC260_Project_3
                         Console.WriteLine("Enter title: ");
                         i1 = Console.ReadLine();
                         var newitem = new Book(i1);
+                        Console.WriteLine("Enter ISBN number: ");
+                        i1 = Console.ReadLine();
+                        newitem.ISBN = i1;
                         Console.WriteLine("Enter authors (enter x to finish): ");
                         while (i1 != "x")
                         {
@@ -143,13 +171,18 @@ namespace CSC260_Project_3
                         Console.WriteLine("Item successfully created ");
                     }
                     else if (i1 == "Periodical")
-                    {/*
+                    {
                         Console.WriteLine("Enter magazine name: ");
-                        i1 += Console.ReadLine();
+                        i1 = Console.ReadLine();
                         Console.WriteLine("Enter volume number: ");
-                        i1 += Console.ReadLine();
-                        var newitem = new Movie(i1);
-                        Console.WriteLine("Enter directors (enter x to finish): ");
+                        var vol = Console.ReadLine();
+                        var vol2 = Int32.Parse(vol);
+                        Console.WriteLine("Enter volume number: ");
+                        var iss = Console.ReadLine();
+                        var iss2 = Int32.Parse(iss);
+
+                        var newitem = new Periodical(i1, vol2, iss2);
+                        Console.WriteLine("Enter editors (enter x to finish): ");
                         while (i1 != "x")
                         {
                             i1 = Console.ReadLine();
@@ -161,13 +194,14 @@ namespace CSC260_Project_3
                         Console.WriteLine("Enter genre: ");
                         i1 = Console.ReadLine();
                         newitem.Genre = i1;
-                        Console.WriteLine("Enter company: ");
+                        Console.WriteLine("Enter publisher: ");
                         i1 = Console.ReadLine();
-                        newitem.Company = i1;
-                        Console.WriteLine("Enter length in minutes: ");
+                        newitem.Publisher = i1;
+                        Console.WriteLine("Enter number of pages: ");
                         i1 = Console.ReadLine();
                         int iparsed = Int32.Parse(i1);
-                        newitem.Minutes = iparsed;*/
+                        newitem.Pages = iparsed;
+                        Console.WriteLine("Item successfully created ");
                     }
                     else if (i1 == "Album")
                     {
@@ -208,6 +242,44 @@ namespace CSC260_Project_3
                 }
                 //Console.WriteLine("EditItem");
                 //extra effort
+                // when user comes to specific item, should there be a loop so the user can edit multiple aspect?
+                if (input == "EditItem")
+                {
+                    Console.WriteLine("Enter media type (options: Book, Movie, Periodical, Album): ");
+                    string i1 = Console.ReadLine();
+                    Console.WriteLine("Enter item ID: ");
+                    string i2 = Console.ReadLine();
+                    var iparsed = Int32.Parse(i2);
+
+                    if (i1 == "Book")
+                    {
+                        Book found = (Book)library.Find(x => x.ID == iparsed);
+                        found.EditItem();
+                    }
+                    
+                    else if (i1 == "Movie")
+                    {
+                        Movie found = (Movie)library.Find(x => x.ID == iparsed);
+                        found.EditItem();
+                    }
+                   
+                    else if (i1 == "Periodical")
+                    {
+                        Periodical found = (Periodical)library.Find(x => x.ID == iparsed);
+                        found.EditItem();
+                    }
+                    
+                    else if (i1 == "Album")
+                    {
+                        Album found = (Album)library.Find(x => x.ID == iparsed);
+                        found.EditItem();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input ");
+                    }
+                    
+                }
 
                 //Console.WriteLine("ShowAll");
                 if (input == "ShowAll")
@@ -246,7 +318,6 @@ namespace CSC260_Project_3
                     }
                 }
 
-                /**/
                 // Console.WriteLine("ShowChanges"); // for log
                 if (input == "ShowChanges")
                 {
@@ -324,14 +395,7 @@ namespace CSC260_Project_3
                     string i1 = Console.ReadLine();
                     int iparsed = Int32.Parse(i1);
                     var found = library.Find(x => x.ID == iparsed);
-                    /*if (found.CheckedOut == false)
-                    { 
-                        Console.WriteLine("Item is not checked out ");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Item is checked out ");
-                    }*/
+
                     Console.WriteLine("Choose an action (options: Return or Checkout): ");
                     i1 = Console.ReadLine();
                     if (i1 == "Return")
@@ -343,6 +407,7 @@ namespace CSC260_Project_3
                         else
                         {
                             found.CheckedOut = false;
+                            Console.WriteLine("Book returned");
                         }
                     }
                     else if (i1 == "Checkout")
@@ -354,6 +419,7 @@ namespace CSC260_Project_3
                         else
                         {
                             found.CheckedOut = true;
+                            Console.WriteLine("Book checked out");
                         }
                     }
                 }

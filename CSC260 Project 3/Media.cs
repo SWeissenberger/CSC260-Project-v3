@@ -8,7 +8,6 @@ namespace CSC260_Project_3
 {
 	public abstract class Media
 	{
-		// FORGOT: write a method to let user edit items--or should that be incorporated into main?
 		//formerly all private
 		public bool _checkedOut = false;
 		//private string[] _creators;
@@ -20,10 +19,8 @@ namespace CSC260_Project_3
 		public static string _log = "";
 		public string _title;
 		//private string _type; // just noticed I didn't make a property for this--should prolly reconcile the subclasses' _type first
-		public string _type = "media";
-
+		public string _type = "Media";
 		public virtual bool CheckedOut { get { return _checkedOut; } set { _checkedOut = value; } }
-		//public virtual string[] Creators { get; private set; }
 		public virtual List<string> Creators { get { return _creators; } set { _creators = value; } }
 		//should I use lists for fields and properties instead of arrays?
 		public virtual string DatePublished { get { return _datePublished; } set { _datePublished = value; } }
@@ -50,11 +47,8 @@ namespace CSC260_Project_3
 
 		public Media()
 		{
-			// what should this do? --it should inc _generatedID, but not let someone make an instance of Media
-			//throw new NotImplementedException();
-			// the incrementing id process doesn't seem to work
 			_generatedID++;
-			_log = _log + "Item added \n";
+			_log = _log + "Item created \n";
 		}
 		// think all this parameters are wrong--think I can (should?) just pass the instance itself 
 		// if i change parameters, don't forget to 
@@ -66,10 +60,12 @@ namespace CSC260_Project_3
 			if (list.Remove(item) == true)
 			{
 				Console.WriteLine("Item deleted");
-				Log = Log + item.Title + "deleted\n";
-				return;
+				Log = Log + "Item" + item.ID + "deleted\n";				 
 			}
-			Console.WriteLine("Error");
+			else 
+			{ 
+				Console.WriteLine("Error");
+			}
 
 		}
 
@@ -143,7 +139,7 @@ namespace CSC260_Project_3
 			}
 		}
 
-		public virtual void ShowFound(bool showAll)
+		protected virtual void ShowFound(bool showAll)
 		{
 			//throw new NotImplementedException();
 			//show item id

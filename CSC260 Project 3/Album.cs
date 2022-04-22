@@ -60,7 +60,7 @@ namespace CSC260_Project_3
 			_instances++;
 		}
 
-		public override void ShowFound(bool showAll)
+		protected override void ShowFound(bool showAll)
 		{
 			Console.WriteLine("ID: " + ID);
 			Console.WriteLine("-Title: " + Title);
@@ -82,6 +82,117 @@ namespace CSC260_Project_3
 				Console.WriteLine("-Genre: " + Genre);
 				Console.WriteLine("-Total length: " + TotalMinutes);
 			}
+		}
+
+		public void EditItem()
+		{
+			Console.WriteLine("Enter aspect to edit (options: Title, Artists, Genre, DatePublished, RecordLabel, TotalMinutes, Songs)");
+			string i1 = Console.ReadLine();
+
+			while (i1 != "Exit") { 
+			if (i1 == "Title")
+			{
+				this.EditTitle();
+			}
+			else if (i1 == "Artists")
+			{
+				this.EditCreators();
+			}
+			else if (i1 == "DatePublished")
+			{
+				this.EditDate();
+			}
+			else if (i1 == "Genre")
+			{
+				this.EditGenre();
+			}
+			else if (i1 == "RecordLabel")
+			{
+				this.EditRecordLabel();
+			}
+			else if (i1 == "TotalMinutes")
+			{
+				this.EditTotalMinutes();
+			}
+			else if (i1 == "Songs")
+			{
+				this.EditSongs();
+			}
+			else
+			{
+				Console.WriteLine("Invalid input");
+			}
+			}
+		}
+		public void EditTitle()
+		{
+			Console.WriteLine("Enter new title: ");
+			string i1 = Console.ReadLine();
+			this.Title = i1;
+			Console.WriteLine("Item successfully altered ");
+			Log = Log + "Title of Item" + this.ID + "edited\n";
+		}
+		public void EditCreators()
+		{
+			Console.WriteLine("Enter new list of artists (enter x to finish): ");
+			var newlist = new List<string> { };
+			this.Creators = newlist;
+			string i1 = "";
+			while (i1 != "x")
+			{
+				i1 = Console.ReadLine();
+				this.Creators.Add(i1);
+			}
+			Console.WriteLine("Item successfully altered ");
+			Log = Log + "Artists of Item" + this.ID + "edited\n";
+		}
+		public void EditDate()
+		{
+			Console.WriteLine("Enter new date (format: MM/DD/YYYY): ");
+			string i1 = Console.ReadLine();
+			this.DatePublished = i1;
+			Console.WriteLine("Item successfully altered ");
+			Log = Log + "Date of Item" + this.ID + "edited\n";
+		}
+		public void EditGenre()
+		{
+			Console.WriteLine("Enter new genre: ");
+			string i1 = Console.ReadLine();
+			this.Genre = i1;
+			Console.WriteLine("Item successfully altered ");
+			Log = Log + "Genre of Item" + this.ID + "edited\n";
+		}
+
+		public void EditRecordLabel()
+        {
+			Console.WriteLine("Enter new record label: ");
+            string i1 = Console.ReadLine();
+            this.RecordLabel = i1;
+			Console.WriteLine("Item successfully altered ");
+			Log = Log + "Record label of Item" + this.ID + "edited\n";
+		}
+		public void EditTotalMinutes()
+        {
+			Console.WriteLine("Enter new total length in minutes: ");
+            string i1 = Console.ReadLine();
+            int iparsed = Int32.Parse(i1);
+			this.TotalMinutes = iparsed;
+			Console.WriteLine("Item successfully altered ");
+			Log = Log + "Total minutes of Item" + this.ID + "edited\n";
+		}
+		public void EditSongs()
+        {
+			Console.WriteLine("Enter new list of songs: ");
+			var newlist = new List<string> { };
+			this.Creators = newlist;
+			string i1 = "";
+			while (i1 != "x")
+			{
+				i1 = Console.ReadLine();
+				this.Songs.Add(i1);
+			}
+			Console.WriteLine("Item successfully altered ");
+			Log = Log + "Songs of Item" + this.ID + "edited\n";
 		}
 	}
 }
